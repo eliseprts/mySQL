@@ -27,32 +27,47 @@ catch(Exception $e)
     <div class="container py-5">
         <div class="row">
             <div class="col-6">
-                <table class="table">
-                    <tr class="table-primary">
-                        <th class="text-uppercase">Ville</th>
-                        <th class="text-uppercase">Température maximale</th>
-                        <th class="text-uppercase">Température minimale</th>
-                    </tr>
-                        <?php
-                            // RECUPERATION CONTENU DE LA TABLE METEO
-                            $result = $db->query('SELECT * FROM Météo');
-                            $data = $result->fetch();
-                            while ($data = $result->fetch()) {
-                                echo 
-                                    '<tr>
-                                        <th>' . $data['ville'] . '</th>
-                                        <td>' . $data['haut'] . '</td>
-                                        <td>' . $data['bas'] . '</td>
-                                    </tr>';
-                            }
-                            $result->closeCursor();
-                        ?>
-                </table>
+                <form action="" method="POST">
+                    <table class="table">
+                        <tr class="table-primary">
+                            <th></th>
+                            <th class="text-uppercase">Ville</th>
+                            <th class="text-uppercase">Température maximale</th>
+                            <th class="text-uppercase">Température minimale</th>
+                        </tr>
+                            <?php
+                                // RECUPERATION CONTENU DE LA TABLE METEO
+                                $result = $db->query('SELECT * FROM Météo');
+                                $data = $result->fetch();
+                                while ($data = $result->fetch()) {
+                                    echo 
+                                        '<tr>
+                                            <th><input type="checkbox" name="city[]" value="' . $data['ville'] . '"></th>
+                                            <th>' . $data['ville'] . '</th>
+                                            <td>' . $data['haut'] . '</td>
+                                            <td>' . $data['bas'] . '</td>
+                                        </tr>';
+                                }
+                                $result->closeCursor();
+                            ?>
+                    </table>
+                            <?php
+                                if(isset($_POST['city'])) {
+                                    foreach($_POST['city'] as $value) {
+                                        $deleteCity = $db->prepare('DELETE FROM Météo WHERE ville = :ville');
+                                        $deleteCity->execute([
+                                            'ville' => $value,
+                                        ]);
+                                    }
+                                }
+                            ?>
+                    <input type="submit" name="submit" value="Supprimer" class="btn btn-primary">
+                </form>
             </div>
         </div>
     </div>
-    <div class="container m-5">
-        <div class="row">
+    <div class="container">
+        <div class="row my-5">
             <h2 class="fs-4">Ajouter une ville</h2>
             <form action="" method="POST">
 
@@ -94,7 +109,7 @@ catch(Exception $e)
                     'higherTemperature' => $higherTemperature,
                     'lowerTemperature' => $lowerTemperature,
                 ]);
-                // header("Location: /php-pdo/");
+                // header("Location:/mySQL/php-pdo/weatherapp.php");
                 // $db->closeCursor();
 
             ?>
