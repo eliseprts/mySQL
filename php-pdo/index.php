@@ -23,7 +23,7 @@ catch(Exception $e)
     <title>WeatherApp</title>
 </head>
 <body class="m-5">
-    <h1 class="fs-1 text fw-light text-uppercase text-primary text-center pyb-5">WheatherApp</h1>
+    <h1 class="fs-1 text fw-light text-uppercase text-primary text-center pyb-5">WeatherApp</h1>
     <div class="container py-5">
         <div class="row">
             <div class="col-6">
