@@ -38,7 +38,6 @@ catch(Exception $e)
                             <?php
                                 // RECUPERATION CONTENU DE LA TABLE METEO
                                 $result = $db->query('SELECT * FROM Météo');
-                                $data = $result->fetch();
                                 while ($data = $result->fetch()) {
                                     echo 
                                         '<tr>

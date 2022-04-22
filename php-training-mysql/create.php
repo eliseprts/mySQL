@@ -1,3 +1,48 @@
+<?php
+
+		// CONNEXION À LA DB
+		try {
+			// Connexion à MySQL
+			$db = new PDO('mysql:host=localhost;dbname=hiking;charset=utf8', 'root', 'root');
+		} catch (Exception $e) {
+			die('Erreur : ' . $e->getMessage());
+		}
+		
+		// VARIABLES
+		$name = $_POST['name'];
+		$distance = $_POST['distance'];
+		$duration = $_POST['duration'];
+		$height_difference = $_POST['height_difference'];
+
+		if ($_POST['difficulty'] == 'très facile') {
+			$difficulty = 'Très facile';
+		} elseif ($_POST['difficulty'] == 'facile') {
+			$difficulty = 'Facile';
+		} elseif ($_POST['difficulty'] == 'moyen') {
+			$difficulty = 'Moyen';
+		} elseif ($_POST['difficulty'] == 'difficile') {
+			$difficulty = 'Difficile';
+		} else {
+			$difficulty = 'Très difficile';
+		}
+
+		// REQUÊTE SQL
+		$insertHiking = $db->prepare('INSERT INTO hiking(name, difficulty, distance, duration, height_difference) VALUES(:name, :difficulty, :distance, :duration, :height_difference)');
+		$insertHiking->execute([
+			'name' => $name,
+			'difficulty' => $difficulty,
+			'distance' => $distance,
+			'duration' => $duration,
+			'height_difference' => $height_difference,
+		]);
+
+		// NOTIFICATION AJOUT
+		if($_SERVER['REQUEST_METHOD'] == 'POST') {
+			echo '<p>La randonnée a bien été ajoutée avec succès !</p>';
+		}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
