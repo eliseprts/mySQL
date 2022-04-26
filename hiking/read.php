@@ -1,11 +1,8 @@
 <!-- CONNEXION À LA BASE DE DONNÉES -->
 <?php
-try {
-  // Connexion à MySQL
-  $db = new PDO('mysql:host=localhost;dbname=hiking;charset=utf8', 'root', 'root');
-} catch (Exception $e) {
-  die('Erreur : ' . $e->getMessage());
-}
+    include_once('mysql.php');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +23,7 @@ try {
         <th>Distance (km)</th>
         <th>Durée</th>
         <th>Dénivelé (m)</th>
+        <th>Accessible</th>
       </tr>
 
       <a href=""></a>
@@ -37,11 +35,13 @@ try {
           echo
             '<tr>
                 <td>' . $data['id'] . '</td>
-                <td><a href="update.php">' . $data['name'] . '</a></td>
+                <td><a href="update.php?id=' . $data['id'] . '">' . $data['name'] . '</a></td>
                 <td>' . $data['difficulty'] . '</td>
                 <td>' . $data['distance'] . '</td>
                 <td>' . $data['duration'] . '</td>
                 <td>' . $data['height_difference'] . '</td>
+                <td>' . $data['available'] . '</td>
+                <td><a href="delete.php?id=' . $data['id'] . '">Supprimer</a></td>
             </tr>';
         }
         $result->closeCursor();
