@@ -102,6 +102,11 @@
 		'id' => $_GET['id'],
 	]);
 
+	// NOTIFICATION UPDATE
+	if($_SERVER['REQUEST_METHOD'] == 'POST') {
+		echo '<p style="color:green;">La randonnée a été modifiée avec succès !</p>';
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -117,14 +122,11 @@
 
 
 	<form action="" method="post">
-		<div>
-			<label for="id">Identifiant de la randonnée</label>
-			<input id="id" name="id" value="<?php echo($_GET['id']); ?>">
-		</div>
+		<input type="hidden" id="id" name="id" value="<?php echo($_GET['id']); ?>">
 		<div>
 			<label for="name">Name</label>
 			<input type="text" name="name" value="<?php echo($hiking['name']); ?>">
-			<!-- <span style="color:red;">* <?php echo $nameErr; ?></span> -->
+			<span style="color:red;">* <?php echo $nameErr; ?></span>
 		</div>
 
 		<div>
@@ -148,7 +150,7 @@
 		<div>
 			<label for="duration">Durée (en heures)</label>
 			<input type="duration" name="duration" value="<?php echo($hiking['duration']); ?>">
-			<!-- <span style="color:red;">* <?php echo $durationErr; ?></span> -->
+			<span style="color:red;">* <?php echo $durationErr; ?></span>
 		</div>
 		<div>
 			<label for="height_difference">Dénivelé (en mètres)</label>

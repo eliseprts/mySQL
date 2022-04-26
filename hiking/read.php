@@ -34,7 +34,6 @@
         while ($data = $result->fetch()) {
           echo
             '<tr>
-                <td>' . $data['id'] . '</td>
                 <td><a href="update.php?id=' . $data['id'] . '">' . $data['name'] . '</a></td>
                 <td>' . $data['difficulty'] . '</td>
                 <td>' . $data['distance'] . '</td>

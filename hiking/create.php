@@ -76,7 +76,7 @@
 
 		// NOTIFICATION AJOUT
 		if($_SERVER['REQUEST_METHOD'] == 'POST') {
-			echo '<p style="color:green;">La randonnée a bien été ajoutée avec succès !</p>';
+			echo '<p style="color:green;">La randonnée a été ajoutée avec succès !</p>';
 		}
 
 ?>
