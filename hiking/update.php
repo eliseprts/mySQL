@@ -2,7 +2,7 @@
 
 	include_once('mysql.php');
 
-	// RÉCUPÉRATION DONNÉES EN FONCTION DE L'ID
+	// 	RÉCUPÉRATION DONNÉES EN FONCTION DE L'ID
 	$retrieveHiking = $db->prepare('SELECT * FROM hiking WHERE id = :id');
 	$retrieveHiking->execute([
 		'id' => $_GET['id'],
@@ -11,11 +11,11 @@
 	$hiking = $retrieveHiking->fetch(PDO::FETCH_ASSOC);
 
 	// ENVOI DES MODIFICATIONS
-	
+
 	// Variables
 	$name = $distance = $duration = $height_difference = $difficulty = $available = "";
 	$nameErr = $distanceErr = $durationErr = $height_differenceErr = $difficultyErr = $availableErr = "";
-	
+
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 		if(empty($_POST['name'])) {
@@ -35,12 +35,6 @@
 		} else {
 			$duration = $_POST['duration'];
 		}
-
-		// if(empty($_POST['duration']) || !is_numeric($_POST['duration'])) {
-		// 	$durationErr= "Un nombre est requis";
-		// } else {
-		// 	$duration = $_POST['duration'];
-		// }
 
 		if(empty($_POST['height_difference']) || !is_numeric($_POST['height_difference'])) {
 			$height_differenceErr = "Un nombre est requis";
@@ -72,8 +66,32 @@
 
 	}
 
+	// $name = $_POST['name'];
+	// $distance = $_POST['distance'];
+	// $duration = $_POST['duration'];
+	// $height_difference = $_POST['height_difference'];
+	// $available = $_POST['available'];
+
+	// switch($_POST['difficulty']) {
+	// 	case 'très facile' :
+	// 		$difficulty = 'Très facile';
+	// 		break;
+	// 	case 'facile' :
+	// 		$difficulty = 'Facile';
+	// 		break;
+	// 	case 'moyen' :
+	// 		$difficulty = 'Moyen';
+	// 		break;
+	// 	case 'difficile' :
+	// 		$difficulty = 'Difficile';
+	// 		break;
+	// 	case 'très difficile' :
+	// 		$difficulty = 'Très difficile';
+	// 		break;
+	// }
+
 	// Requête SQL
-	$updateHiking = $db->prepare('UPDATE hiking SET name = :name, difficulty = :difficulty, distance = :distance, duration = :duration, height_difference = :height_difference, avalaible = :available WHERE id = :id');
+	$updateHiking = $db->prepare('UPDATE hiking SET name = :name, difficulty = :difficulty, distance = :distance, duration = :duration, height_difference = :height_difference, available = :available WHERE id = :id');
 	$updateHiking->execute([
 		'name' => $name,
 		'difficulty' => $difficulty,
@@ -83,11 +101,6 @@
 		'available' => $available,
 		'id' => $_GET['id'],
 	]);
-
-	// // NOTIFICATION AJOUT
-	// if($_SERVER['REQUEST_METHOD'] == 'POST') {
-	// 	echo '<p>La randonnée a bien été modifiée avec succès !</p>';
-	// }
 
 ?>
 
@@ -111,7 +124,7 @@
 		<div>
 			<label for="name">Name</label>
 			<input type="text" name="name" value="<?php echo($hiking['name']); ?>">
-			<span style="color:red;">* <?php echo $nameErr; ?></span>
+			<!-- <span style="color:red;">* <?php echo $nameErr; ?></span> -->
 		</div>
 
 		<div>
@@ -135,7 +148,7 @@
 		<div>
 			<label for="duration">Durée (en heures)</label>
 			<input type="duration" name="duration" value="<?php echo($hiking['duration']); ?>">
-			<span style="color:red;">* <?php echo $durationErr; ?></span>
+			<!-- <span style="color:red;">* <?php echo $durationErr; ?></span> -->
 		</div>
 		<div>
 			<label for="height_difference">Dénivelé (en mètres)</label>

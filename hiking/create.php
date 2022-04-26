@@ -74,10 +74,10 @@
 			'available' => $available,
 		]);
 
-		// // NOTIFICATION AJOUT
-		// if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		// 	echo '<p style="color:green;">La randonnée a bien été ajoutée avec succès !</p>';
-		// }
+		// NOTIFICATION AJOUT
+		if($_SERVER['REQUEST_METHOD'] == 'POST') {
+			echo '<p style="color:green;">La randonnée a bien été ajoutée avec succès !</p>';
+		}
 
 ?>
 

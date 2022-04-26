@@ -48,5 +48,8 @@
       ?>
 
     </table>
+    <div>
+      <a href="create.php" target="_blank">Ajouter une randonnée</a>
+    </div>
   </body>
 </html>

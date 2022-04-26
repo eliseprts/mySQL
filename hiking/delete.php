@@ -10,7 +10,7 @@
 
     // NOTIFICATION SUPPRESSION
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		echo '<p>La randonnée a été supprimée avec succès !</p>';
+		echo '<p style="color:green;">La randonnée a été supprimée avec succès !</p>';
 	}
 
 ?>
